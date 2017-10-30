@@ -4,7 +4,7 @@
 
 There lot of websites applications that contain information on the latest video games out there, for Overwatch.GG we wanted to create one ourselves based on the popular video game "Overwatch". What sets our project apart from the others is that our project provides as a main hub containing most if not all the information you could get out your selected hero from Overwatch. This was also the motivation for the project as we felt it took a new direction of where video games information sites were headed.
 
-This project took around a two days of development and was finished sometime around September 21, 2017.
+This project took around a day of development and was finished sometime around September 21, 2017.
 
 # Design Process:
 
