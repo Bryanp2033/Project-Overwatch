@@ -11,7 +11,7 @@ This project took around a two days of development and was finished sometime aro
 We felt that displaying our data dynamically in one page would be the best option going forward in the project. We also felt the need to use apis to grab the external data of other websites like youtube and display visual information(like gameplay footage) to the user.
 
 # Main Page
-![Main Page](/gifs/main.gif "Main Page")
+![Main Page](/gifs/main-page.gif "Main Page")
 
 # Character Section and Hero's Details
 ![Character Section and Hero's Details](/gifs/Character.gif "Character Section and Hero's Details")
