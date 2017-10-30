@@ -2,6 +2,7 @@
  /* changes the document text with this font-family */
  *{
      font-family: 'Raleway', sans-serif;
+     padding: 0;
  }
 
  /* targets the overwatch logo and "verwatch.gg text */
@@ -113,7 +114,6 @@
      padding-bottom: 15px; 
  }
 
-
  /* targets the videos div */
  #videos{
      margin-left: 60px;
@@ -127,11 +127,6 @@
      text-align: center;
  }
 
-
- /* changes the document text with this font-family */
- *{
-     font-family: 'Raleway', sans-serif;
- }
 
  /* targets the overwatch logo and "verwatch.gg text */
  .navbar-title {
@@ -193,6 +188,11 @@
      background-color: #FAFAFA;
  }
 
+ /* the button grid of the hero selection buttons */
+ #grid{
+    margin-bottom: 20px;
+ }
+
  /* targets the div that contains the "Hero Selection" text and button grid */
  .char-select{
    padding-top: 20px;
@@ -211,6 +211,81 @@
  /* targets the "Hero Selection" text */
  .headline-box{
      text-align: center;
+ }
+
+ /* the div containing all the stats of the hero */
+ #hero-details{
+    border: 1px #292B2C;
+ }
+
+ /* the Hero's name in the details div */
+ .hero-name{
+    background: #5E6365;
+    color: white;
+    margin-bottom: 10px;
+    text-align: center;
+ }
+
+  /* targets the videos div */
+  #videos{
+    margin-left: 60px;
+    margin-right: 0px;
+ }
+
+ /* the div containing the external link buttons */
+ #buttons{
+   text-align: center;
+   margin-top: 40px;
+ }
+
+ /* the 'buttons' itself */
+ a:hover {
+    text-decoration: none;
+ }
+
+ /* button for the hero lore */
+ .hero-lore{
+    background: green;
+    padding: 20px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    margin: 20px;
+    font-size: 20px;
+ }
+
+ .hero-lore:hover{
+    color: orange;
+ }
+
+ /* the button for the hero's win rate */
+ .hero-rate{
+    background: green;
+    padding: 20px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    margin: 20px;
+    font-size: 20px;
+ }
+
+ .hero-rate:hover{
+    color: orange;
+ }
+
+ /* the button for hero merch */
+ .hero-merch{
+    background: green;
+    padding: 20px;
+    text-decoration: none;
+    color: white;
+    border-radius: 5px;
+    margin: 20px;
+    font-size: 20px;
+ }
+
+ .hero-merch:hover{
+    color: orange;
  }
 
  /* targets the div containg the about info */
@@ -242,12 +317,6 @@
      padding-bottom: 15px; 
  }
 
-
- /* targets the videos div */
- #videos{
-     margin-left: 60px;
- }
-
  /* targets the footer div */
  .footer{
      border: 2px solid black;
@@ -255,4 +324,3 @@
      padding: 10px;
      text-align: center;
  }
-

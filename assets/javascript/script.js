@@ -28,13 +28,14 @@ $(document).ready(function(){
 
 })
 
-$(document).on("click", "button", function(){
+$(document).on("click", ".characters", function(){
 
     // targets the url of the selected hero's url found in the hero's json object
     var click = $(this).data().url;
 
     //this refreshes the videos div containing the youtube videos
     $("#videos").empty();
+    $("#buttons").empty();
 
     $.ajax({
        url: click,
@@ -42,8 +43,9 @@ $(document).on("click", "button", function(){
    }).done(function(result){
 
     //this refreshes the details div containing the hero's details
+    $("#videos").empty();
     $("#details").empty();
-
+    $("#buttons").empty();
 
     var details = $("<div>");
     details.addClass("hero-details")
@@ -58,19 +60,25 @@ $(document).on("click", "button", function(){
 
         var heroAffiliation = $("<div>")
         heroAffiliation.addClass("hero-Affiliation")
-        heroAffiliation.html("Affiliation: "+result.affiliation);
-
+        if(result.affiliation == null){
+            heroAffiliation.html("Affiliation: None");
+        } else{
+            heroAffiliation.html("Affiliation: "+result.affiliation);
+        }
         var heroDifficulty = $("<span>")
         heroDifficulty.addClass("hero-difficulty")
-        heroDifficulty.html("Difficulty: "+result.difficulty)
+        heroDifficulty.html("Difficulty: "+result.difficulty + "<hr>")
 
         var heroOperations = $("<div>")
         heroOperations.addClass("hero-operations")
-        heroOperations.html("Location: "+result.base_of_operations);
-
+        if(result.base_of_operations == null){
+            heroOperations.html("Location: None");
+        } else{
+            heroOperations.html("Location: " + result.base_of_operations + "<hr>");
+        }
         var heroDescription = $("<p>")
         heroDescription.addClass("hero-description")
-        heroDescription.html("Description: "+result.description)
+        heroDescription.html("Description: "+result.description + "<hr>")
 
 
 
@@ -78,7 +86,7 @@ $(document).on("click", "button", function(){
 
         var heroStats = $("<div>")
         heroStats.addClass("hero-stats")
-        heroStats.html("Hero Stats")
+        heroStats.html("Hero Stats: ")
         $(heroStats).append("<br>")
             var heroHealth = $("<span>")
             heroHealth.addClass("hero-health")
@@ -93,10 +101,8 @@ $(document).on("click", "button", function(){
             heroArmour.append("Armor: ")
             heroArmour.append(result.armour)
             $(heroStats).append(heroArmour)
-            $(heroStats).append("<br>")
+            $(heroStats).append("<br><hr>")
             
-            
-
             var abilities = $("<div>");
             var abilitiesText = $("<p> Abilities </p>");
             abilities.append(abilitiesText);
@@ -108,7 +114,7 @@ $(document).on("click", "button", function(){
             var heroAbilities = $("<div>")
             heroAbilities.addClass("hero-abilities")
             heroAbilities.css({"margin-bottom": 5+"px"});
-            heroAbilities.html( result.abilities[i].name + ": " + result.abilities[i].description)
+            heroAbilities.html( result.abilities[i].name + ": " + result.abilities[i].description + "<hr>")
             $(abilities).append(heroAbilities)
         }
        
@@ -116,71 +122,68 @@ $(document).on("click", "button", function(){
             heroRole.addClass("hero-role")
             heroRole.html("<br>"+"Hero Role: " + "<br>" + result.role.name)
             $(heroOperations).append(heroRole)
-            $(heroOperations).append("<br>")
+            $(heroOperations).append("<hr>")
 
             
             // this creates an "<a>" tag that contains a link the selected Hero's lore
             var heroLore = $("<a>")
-            heroLore.addClass("hero-role")
+            heroLore.addClass("hero-lore")
             heroLore.html("Learn More about their Lore")
             heroLore.attr("href", "http://overwatch.wikia.com/wiki/" + result.name)
-            heroLore.css({"background": "black", "border-right": "3px solid white" });
             heroLore.attr("target", "_blank")
-            $(heroStats).append(heroLore)
+            $("#buttons").append(heroLore)
 
             // this creates an "<a>" tag that contains a link the selected Hero's stats
-           var heroRate = $("<a>")
-           heroRate.addClass("hero-rate")
-           heroRate.html("Learn More About Their Win Rates")
-           heroRate.attr("href", "https://www.overbuff.com/heroes/" + result.name)
-           heroRate.css({"background": "black", "border-right": "3px solid white" });
-           heroRate.attr("target", "_blank")
-           $(heroStats).append(heroRate)
+            var heroRate = $("<a>")
+            heroRate.addClass("hero-rate")
+            heroRate.html("Learn More About Their Win Rates")
+            heroRate.attr("href", "https://www.overbuff.com/heroes/" + result.name)
+            heroRate.attr("target", "_blank")
+            $("#buttons").append(heroRate)
 
 
-          // this creates an "<a>" tag that contains a link redirecting to amazon with the search words of the selected Hero"
-           var heroMerch = $("<a>")
-           heroMerch.addClass("hero-merch")
-           heroMerch.html("Buy " + result.name + " " + "Merch")
-           heroMerch.attr("href", "https://www.amazon.com/s/ref=nb_sb_noss_1/142-0300230-6136724?url=search-alias%3Daps&field-keywords=overwatch+" + result.name)
-           heroMerch.attr("target", "_blank")
-           heroMerch.css({"background": "black" });
-           $(heroStats).append(heroMerch)
+            // this creates an "<a>" tag that contains a link redirecting to amazon with the search words of the selected Hero"
+            var heroMerch = $("<a>")
+            heroMerch.addClass("hero-merch")
+            heroMerch.html("Buy " + result.name + " " + "Merch")
+            heroMerch.attr("href", "https://www.amazon.com/s/ref=nb_sb_noss_1/142-0300230-6136724?url=search-alias%3Daps&field-keywords=overwatch+" + result.name)
+            heroMerch.attr("target", "_blank")
+            $("#buttons").append(heroMerch)
 
         // conditional statements for heros that have special characters in their name
-           lowerCaseHero = result.name.toLowerCase()
-           soldier = "soldier-76"
-           lucio = "lucio"
-           torbjorn = "torbjorn"
-           dva = "dva"
+            lowerCaseHero = result.name.toLowerCase()
+            soldier = "soldier-76"
+            lucio = "lucio"
+            torbjorn = "torbjorn"
+            dva = "dva"
 
         // displays the hero's thumbnail image
-           var heroImg = $("<img>")
-           heroImg.attr("src", "https://blzgdapipro-a.akamaihd.net/hero/" + lowerCaseHero + "/icon-portrait.png")
-           if(result.name == "Soldier: 76"){
+            var heroImg = $("<img>")
+            heroImg.attr("src", "https://blzgdapipro-a.akamaihd.net/hero/" + lowerCaseHero + "/icon-portrait.png")
+            if(result.name == "Soldier: 76"){
                heroImg.attr("src", "https://blzgdapipro-a.akamaihd.net/hero/" + soldier + "/icon-portrait.png")
-           }
-           if(result.name == "Torbjörn"){
+            }
+            if(result.name == "Torbjörn"){
                heroImg.attr("src", "https://blzgdapipro-a.akamaihd.net/hero/" + torbjorn + "/icon-portrait.png")
-           }
-           if(result.name == "Lúcio"){
+            }
+            if(result.name == "Lúcio"){
                heroImg.attr("src", "https://blzgdapipro-a.akamaihd.net/hero/" + lucio + "/icon-portrait.png")
-           }
-           if(result.name == "D.Va"){
+            }
+            if(result.name == "D.Va"){
                heroImg.attr("src", "https://blzgdapipro-a.akamaihd.net/hero/" + dva + "/icon-portrait.png")
-           }
+            }
           
-           $("#details").prepend(heroImg);
+            $("#details").prepend(heroImg);
            
            
         // the youtube api key along with the youtube url used for the ajax call
-           var youtubeApiKey = "AIzaSyAgk2t-v33L1UZlEksXMD96frXKLKhNIUQ"
-           var youtubeUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=overwatch+" + result.name + "+" + "gameplay" + "&key=" + youtubeApiKey
+            var youtubeApiKey = "AIzaSyAgk2t-v33L1UZlEksXMD96frXKLKhNIUQ"
+            var youtubeUrl = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=overwatch+" + result.name + "+" + "gameplay" + "&key=" + youtubeApiKey
 
-           $.ajax({
+            $.ajax({
                url: youtubeUrl,
                method: 'GET',
-           }).done(function(response){
+            }).done(function(response){
 
                 // the css for the videos div
                 $("#videos").css({
@@ -203,8 +206,6 @@ $(document).on("click", "button", function(){
                    console.log(video)
                }
            })
-    
-    
     
     $(details).append(heroName, heroInfo, heroStats)
 
